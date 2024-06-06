@@ -1,10 +1,10 @@
 //format date
 function formatDateToDDMMYY(date) {
-    let day = String(date.getDate()).padStart(2, '0');    // Get the day and pad with leading zero if needed
-    let month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (0-11) and pad with leading zero
-    let year = String(date.getFullYear()).slice(-2);      // Get the last two digits of the year
+  let day = String(date.getDate()).padStart(2, '0');    // Get the day and pad with leading zero if needed
+  let month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (0-11) and pad with leading zero
+  let year = String(date.getFullYear()).slice(-2);      // Get the last two digits of the year
 
-    return `${day}/${month}/${year}`;
+  return `${day}/${month}/${year}`;
 }
 
 // Create a "close" button and append it to each list item
@@ -40,17 +40,23 @@ list.addEventListener('click', function(ev) {
 function newElement() {
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
+  var dueDateValue = document.getElementById("myDueDate").value;
+
   if (inputValue === '') {
     alert("You must write something!");
   } else {
     inputValue = inputValue.toUpperCase()
     inputValue = formatDateToDDMMYY(new Date()) + " - " + inputValue
+    if (dueDateValue !== '') {
+      inputValue += " (Due: " + formatDateToDDMMYY(new Date(dueDateValue)) + ")";
+    }
     var t = document.createTextNode(inputValue);
     li.appendChild(t);
     document.getElementById("myUL").appendChild(li);
   }
 
   document.getElementById("myInput").value = "";
+  document.getElementById("myDueDate").value = "";
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -64,4 +70,4 @@ function newElement() {
       div.style.display = "none";
     }
   }
-} 
+}
